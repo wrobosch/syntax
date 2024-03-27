@@ -1,0 +1,61 @@
+#include <Servo.h>
+
+Servo myservo;  // create servo object to control a servo
+// twelve servo objects can be created on most boards
+
+int motor = 5;           // the PWM pin the motor is attached to
+int brightness = 0;    // how bright the motor is
+int fadeAmount = 5;    // how many points to fade the motor by
+int pos = 0;    // variable to store the servo position
+
+// the setup routine runs once when you press reset:
+void setup() {
+  // declare pin 9 to be an output:
+  pinMode(motor, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(13, OUTPUT);
+  myservo.attach(10);  // attaches the servo on pin 10 to the servo object
+}
+
+// the loop routine runs over and over again forever:
+void loop() 
+{
+  analogWrite(motor, 0);
+  digitalWrite(12, LOW);
+  digitalWrite(13, LOW);
+  delay(1000);
+  
+  for (pos = 0; pos <= 90; pos += 5) { // goes from 0 degrees to 180 degrees
+    // in steps of 1 degree
+    analogWrite(motor, brightness);
+    myservo.write(pos);              // tell servo to go to position in variable 'pos'
+    brightness = brightness + fadeAmount;
+    if (brightness <= 0 || brightness >= 100) 
+    {
+      fadeAmount = -fadeAmount;
+    }
+    delay(50);                       // waits 15 ms for the servo to reach the position
+  }
+
+  analogWrite(motor, 0);
+  digitalWrite(12, HIGH);
+  digitalWrite(13, HIGH);
+  delay(1000);
+  
+  // set the brightness of pin 9:
+  for (pos = 90; pos >= 0; pos -= 5) 
+  {                                   // goes from 180 degrees to 0 degrees
+    analogWrite(motor, brightness);
+    myservo.write(pos);              // tell servo to go to position in variable 'pos'
+    brightness = brightness + fadeAmount;
+    if (brightness <= 0 || brightness >= 100) 
+    {
+      fadeAmount = -fadeAmount;
+    }
+    delay(50);                       // waits 15 ms for the servo to reach the position
+  }
+
+
+
+  
+}
