@@ -53,9 +53,5 @@ void loop()
       fadeAmount = -fadeAmount;
     }
     delay(50);                       // waits 15 ms for the servo to reach the position
-  }
-
-
-
-  
+  }  
 }
