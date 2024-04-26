@@ -34,7 +34,7 @@ void loop()
     {
       fadeAmount = -fadeAmount;
     }
-    delay(50);                       // waits 15 ms for the servo to reach the position
+    delay(100);                       // waits 15 ms for the servo to reach the position
   }
 
   analogWrite(motor, 0);
